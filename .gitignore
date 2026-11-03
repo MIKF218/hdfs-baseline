@@ -1,3 +1,9 @@
+# Dataset: too large for git, download from LogHub (see README)
 data/*
 !data/.gitkeep
+
+# Python cache
 __pycache__/
+*.pyc
+
+# results/ is tracked on purpose: all outputs are versioned with the code

@@ -38,15 +38,28 @@ Comparison detectors (reference only, not thesis methods):
 
 ```
 hdfs-baseline/
-├── .devcontainer/devcontainer.json   VS Code Dev Container config
-├── Dockerfile                        Python 3.12 image with pinned packages
+├── .devcontainer/
+│   └── devcontainer.json             VS Code Dev Container config
+├── .dockerignore
+├── .gitignore                        ignores data/ and Python cache only
+├── Dockerfile                        Python 3.12 image; default command runs the primary pipeline
+├── README.md
 ├── requirements.txt                  drain3, scikit-learn, pandas, numpy (pinned)
-├── data/                             put the HDFS dataset here (not in git)
+├── data/                             HDFS dataset (ignored by git, download from LogHub)
+│   ├── .gitkeep
 │   ├── HDFS.log
 │   └── anomaly_label.csv
-├── results/                          
+├── results/                          all outputs (tracked in git)
+│   ├── counts.csv                    block x template count matrix, 575,061 rows (~71 MB)
+│   ├── results_pca_q.json            PRIMARY result: PCA + Q-statistic
+│   ├── results_v2.json               comparison detectors (Isolation Forest, PCA, supervised)
+│   ├── results_v2_pca.json           PCA variants (normal-only, unsupervised percentiles)
+│   ├── results.json                  first run: Isolation Forest, 80/20 split
+│   ├── templates.csv                 the 46 Drain3 templates and their counts
+│   ├── test_scores.csv               first run: anomaly score per test block
+│   └── v2_run.log                    run log of hdfs_baseline_v2.py
 └── src/
-    ├── export_counts.py              step 1: HDFS.log -> block x template count matrix
+    ├── export_counts.py              step 1: HDFS.log -> results/counts.csv
     ├── hdfs_baseline_pca_q.py        step 2: PRIMARY detector, PCA + Q-statistic
     ├── hdfs_baseline_v2.py           comparison detectors and shared helpers
     └── hdfs_baseline.py              first run (Drain3 + Isolation Forest); parser used by step 1
@@ -92,13 +105,22 @@ python src/hdfs_baseline.py --log data/HDFS.log --labels data/anomaly_label.csv 
 
 ### With plain Docker
 
+The image's default command runs the primary pipeline: it parses the log into `results/counts.csv`
+(skipped if that file already exists), then runs PCA + Q-statistic.
+
 ```bash
 docker build -t hdfs-baseline .
-docker run --rm -v "$PWD/data:/workspace/data" -v "$PWD/results:/workspace/results" hdfs-baseline \
-  python src/export_counts.py --log data/HDFS.log --labels data/anomaly_label.csv --out results/counts.csv
-docker run --rm -v "$PWD/data:/workspace/data" -v "$PWD/results:/workspace/results" hdfs-baseline \
-  python src/hdfs_baseline_pca_q.py --counts results/counts.csv --labels data/anomaly_label.csv --out results/results_pca_q.json
+docker run --rm -v "$PWD/data:/workspace/data" -v "$PWD/results:/workspace/results" hdfs-baseline
 ```
+
+To run any other script, add its command after the image name, for example:
+
+```bash
+docker run --rm -v "$PWD/data:/workspace/data" -v "$PWD/results:/workspace/results" hdfs-baseline \
+  python src/hdfs_baseline_v2.py --counts results/counts.csv --labels data/anomaly_label.csv --out results/results_v2.json
+```
+
+To force a fresh parse, delete `results/counts.csv` first.
 
 On Windows PowerShell, use `${PWD}` instead of `$PWD` and put each command on one line.
 

@@ -1,0 +1,89 @@
+{
+  "settings": {
+    "rule": "PCA SPE, Q-statistic (Jackson & Mudholkar 1979)",
+    "alpha": 0.001,
+    "variance_kept": 0.95,
+    "fit_on": "all training blocks, no labels",
+    "split": "chronological 60/20/20 (validation unused)"
+  },
+  "pca": {
+    "n_components_kept": 5,
+    "n_features": 46,
+    "theta1": 1.82910570818684,
+    "theta2": 0.5389095487791355,
+    "theta3": 0.1943245865296689,
+    "h0": 0.18408758634217248,
+    "alpha": 0.001,
+    "q_threshold": 7.565323684958809
+  },
+  "train_fraction_flagged": 0.02813329623575511,
+  "test_fraction_flagged": 0.014094058932468503,
+  "diagnostics": {
+    "blocks": {
+      "train": 345036,
+      "val": 115012,
+      "test": 115013
+    },
+    "anomaly_rate": {
+      "train": 0.0323386545172098,
+      "val": 0.03478767432963517,
+      "test": 0.014598349751767192
+    },
+    "unique_count_vectors": {
+      "train": 519,
+      "test": 56
+    },
+    "train_vectors_with_both_labels": 9,
+    "test_anomalies": 1679,
+    "test_anomalies_identical_to_a_normal_train_vector": 0,
+    "test_anomalies_identical_fraction": 0.0,
+    "window_blocks_for_target_anomalies": {
+      "30": 2056,
+      "50": 3426,
+      "100": 6851
+    }
+  },
+  "test_metrics": {
+    "precision": 0.9969154842689698,
+    "recall": 0.9624776652769506,
+    "f1": 0.9793939393939393,
+    "fpr": 4.411738754477915e-05,
+    "tp": 1616,
+    "fp": 5,
+    "fn": 63,
+    "tn": 113329,
+    "pr_auc": 0.9567844862923516,
+    "roc_auc": 0.978057472380282
+  },
+  "bootstrap_ci95_test_blocks": {
+    "q_stat": {
+      "precision": [
+        0.9940419168285362,
+        0.9993854001304671
+      ],
+      "recall": [
+        0.9532718581123472,
+        0.9721877855175124
+      ],
+      "f1": [
+        0.9743175778866706,
+        0.984524039687261
+      ],
+      "fpr": [
+        8.82563458760345e-06,
+        8.82118726567716e-05
+      ]
+    },
+    "_auc": {
+      "pr_auc": [
+        0.9457727463349432,
+        0.9676066878424049
+      ],
+      "roc_auc": [
+        0.9727039070521916,
+        0.9840034928184387
+      ]
+    }
+  },
+  "total_seconds": 15.5
+}

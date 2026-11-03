@@ -1,0 +1,47 @@
+cluster_id,size,seen_in_train,template
+1,1723232,True,Receiving block <BLK> src: /<IP> dest: /<IP>
+2,575061,True,BLOCK* NameSystem.allocateBlock: <*> <BLK>
+3,1706728,True,PacketResponder <NUM> for block <BLK> <*>
+4,1706514,True,Received block <BLK> of size <NUM> from /<IP>
+5,1719741,True,BLOCK* NameSystem.addStoredBlock: blockMap updated: <IP> is added to <BLK> size <NUM>
+6,7097,True,Received block <BLK> src: /<IP> dest: /<IP> of size <NUM>
+7,6937,True,<IP>:Transmitted block <BLK> to /<IP>
+8,165,True,"<IP> Starting thread to transfer block <BLK> to <IP>, <IP>"
+9,165,True,BLOCK* ask <IP> to replicate <BLK> to datanode(s) <IP> <IP>
+10,428726,True,<IP> Served block <BLK> to /<IP>
+11,6837,True,BLOCK* ask <IP> to replicate <BLK> to datanode(s) <IP>
+12,6837,True,<IP> Starting thread to transfer block <BLK> to <IP>
+13,120036,True,Verification succeeded for <BLK>
+14,67,True,writeBlock <BLK> received exception <*>
+15,29,True,PacketResponder <BLK> <NUM> Exception <*>
+16,3226,True,writeBlock <BLK> received exception java.io.IOException: Could not read from stream
+17,1402047,True,Deleting block <BLK> file <*>
+18,1464,True,Receiving empty packet for block <BLK>
+19,75,True,Exception in receiveBlock for block <BLK> java.io.IOException: Connection reset by peer
+20,75,True,writeBlock <BLK> received exception java.io.IOException: Connection reset by peer
+21,975,True,BLOCK* NameSystem.addStoredBlock: Redundant addStoredBlock request received for <BLK> on <IP> size <NUM>
+22,22,True,PacketResponder <BLK> <NUM> Exception java.net.SocketTimeoutException: <NUM> millis timeout while waiting for channel to be ready for read. ch : java.nio.channels.SocketChannel[connected local=/<IP> remote=/<IP>]
+23,33,True,PacketResponder <BLK> <NUM> Exception java.io.InterruptedIOException: Interruped while waiting for IO on channel java.nio.channels.SocketChannel[connected local=/<IP> remote=/<IP>]. <NUM> millis timeout left.
+24,56,True,Exception in receiveBlock for block <BLK> <*>
+25,65,True,Changing block file offset of block <BLK> from <NUM> to <NUM> meta file offset to <NUM>
+26,34,True,<IP>:Exception writing block <BLK> to mirror <IP>
+27,16,True,Exception in receiveBlock for block <BLK> java.io.InterruptedIOException: Interruped while waiting for IO on channel java.nio.channels.SocketChannel[connected local=/<IP> remote=/<IP>]. <NUM> millis timeout left.
+28,7,True,writeBlock <BLK> received exception java.io.InterruptedIOException: Interruped while waiting for IO on channel java.nio.channels.SocketChannel[connected local=/<IP> remote=/<IP>]. <NUM> millis timeout left.
+29,6,True,PacketResponder <BLK> <NUM> Exception java.io.IOException: Broken pipe
+30,9,True,"writeBlock <BLK> received exception java.io.IOException: Block <BLK> is valid, and cannot be written to."
+31,9,True,<IP>:Failed to transfer <BLK> to <IP> got java.io.IOException: Connection reset by peer
+32,1396174,True,BLOCK* NameSystem.delete: <BLK> is added to invalidSet of <IP>
+33,5545,True,Unexpected error trying to delete block <BLK>. BlockInfo not found in volumeMap.
+34,1288,True,BLOCK* NameSystem.addStoredBlock: addStoredBlock request received for <BLK> on <IP> size <NUM> But it does not belong to any file.
+35,356207,True,<IP>:Got exception while serving <BLK> to /<IP>:
+36,13,True,PacketResponder <BLK> <NUM> Exception java.io.IOException: <*> <*> <*> <*>
+37,5,True,Exception in receiveBlock for block <BLK> java.net.SocketTimeoutException: <NUM> millis timeout while waiting for channel to be ready for write. ch : java.nio.channels.SocketChannel[connected local=/<IP> remote=/<IP>]
+38,15,True,writeBlock <BLK> received exception java.net.SocketTimeoutException: <NUM> millis timeout while waiting for channel to be ready for <*> ch : java.nio.channels.SocketChannel[connected local=/<IP> remote=/<IP>]
+39,5,True,Reopen Block <BLK>
+40,4,True,BLOCK* Removing block <BLK> from neededReplications as it does not belong to any file.
+41,47,True,PendingReplicationMonitor timed out block <BLK>
+42,16,True,writeBlock <BLK> received exception java.io.IOException: <*> <*>
+43,5,True,PacketResponder <BLK> <NUM> Exception java.io.InterruptedIOException: Interruped while waiting for IO on channel java.nio.channels.SocketChannel[closed]. <NUM> millis timeout left.
+44,1,True,writeBlock <BLK> received exception java.net.NoRouteToHostException: No route to host
+45,10,True,Adding an already existing block <BLK>
+46,3,True,Exception in receiveBlock for block <BLK> java.io.IOException: Broken pipe

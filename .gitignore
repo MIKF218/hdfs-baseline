@@ -1,5 +1,3 @@
 data/*
 !data/.gitkeep
-results/*
-!results/.gitkeep
 __pycache__/

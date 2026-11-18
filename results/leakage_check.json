@@ -1,0 +1,217 @@
+{
+  "log": {
+    "lines_parsed": 11175629,
+    "lines_unmatched": 0,
+    "blocks": 575061,
+    "line_block_pairs": 11175629,
+    "parse_seconds": 990.9
+  },
+  "split": {
+    "train_blocks": 345036,
+    "validation_blocks": 115012,
+    "test_blocks": 115013,
+    "training_period_ends_at_line": 6856030,
+    "test_period_starts_at_line": 9012193,
+    "share_of_lines_before_training_period_end": 0.6134804582364,
+    "share_of_lines_before_test_period": 0.8064148335632831
+  },
+  "1_parser_causality": {
+    "lines_compared": 9012193,
+    "template_id_mismatches": 0,
+    "templates_known_to_fresh_parser_at_boundary": 46,
+    "templates_created_before_boundary_in_full_parse": 46
+  },
+  "2_template_timing": {
+    "templates_total": 46,
+    "created_during_training_period": 44,
+    "created_during_validation_period": 2,
+    "created_during_test_period": 0,
+    "templates_absent_from_training_blocks": 2,
+    "templates_absent_from_training_blocks_but_present_in_test_blocks": 0,
+    "late_templates": [
+      {
+        "template_id": 45,
+        "created_at_line": 7023748,
+        "period": "validation",
+        "events_in_train_blocks": 0,
+        "events_in_validation_blocks": 10,
+        "events_in_test_blocks": 0,
+        "template": "Adding an already existing block <BLK>"
+      },
+      {
+        "template_id": 46,
+        "created_at_line": 8729165,
+        "period": "validation",
+        "events_in_train_blocks": 0,
+        "events_in_validation_blocks": 3,
+        "events_in_test_blocks": 0,
+        "template": "Exception in receiveBlock for block <BLK> java.io.IOException: Broken pipe"
+      }
+    ]
+  },
+  "3_session_overlap": {
+    "after_test_period_starts": {
+      "training_block_lines_after_boundary": 5550,
+      "share_of_training_block_lines": 0.0007616907173369866,
+      "training_blocks_affected": 1470,
+      "share_of_training_blocks": 0.004260424999130525,
+      "affected_blocks_anomalous": 13,
+      "top_templates_of_late_lines": [
+        {
+          "template_id": 13,
+          "lines": 1237,
+          "template": "Verification succeeded for <BLK>"
+        },
+        {
+          "template_id": 5,
+          "lines": 1078,
+          "template": "BLOCK* NameSystem.addStoredBlock: blockMap updated: <IP> is added to <BLK> size <NUM>"
+        },
+        {
+          "template_id": 12,
+          "lines": 540,
+          "template": "<IP> Starting thread to transfer block <BLK> to <IP>"
+        },
+        {
+          "template_id": 11,
+          "lines": 540,
+          "template": "BLOCK* ask <IP> to replicate <BLK> to datanode(s) <IP>"
+        },
+        {
+          "template_id": 6,
+          "lines": 538,
+          "template": "Received block <BLK> src: /<IP> dest: /<IP> of size <NUM>"
+        }
+      ]
+    },
+    "after_training_period_ends": {
+      "training_block_lines_after_boundary": 430392,
+      "share_of_training_block_lines": 0.059067674092991046,
+      "training_blocks_affected": 72123,
+      "share_of_training_blocks": 0.20903036204917746,
+      "affected_blocks_anomalous": 886,
+      "top_templates_of_late_lines": [
+        {
+          "template_id": 17,
+          "lines": 207505,
+          "template": "Deleting block <BLK> file <*>"
+        },
+        {
+          "template_id": 32,
+          "lines": 206167,
+          "template": "BLOCK* NameSystem.delete: <BLK> is added to invalidSet of <IP>"
+        },
+        {
+          "template_id": 5,
+          "lines": 3877,
+          "template": "BLOCK* NameSystem.addStoredBlock: blockMap updated: <IP> is added to <BLK> size <NUM>"
+        },
+        {
+          "template_id": 13,
+          "lines": 3224,
+          "template": "Verification succeeded for <BLK>"
+        },
+        {
+          "template_id": 1,
+          "lines": 1354,
+          "template": "Receiving block <BLK> src: /<IP> dest: /<IP>"
+        }
+      ]
+    }
+  },
+  "4_pca_q_variants": {
+    "alpha": 0.001,
+    "test_blocks": 115013,
+    "test_anomalies": 1679,
+    "variants": {
+      "a_as_reported": {
+        "training_blocks": 345036,
+        "features": 46,
+        "pca_components_kept": 5,
+        "q_threshold": 7.565323684958809,
+        "precision": 0.9969154842689698,
+        "recall": 0.9624776652769506,
+        "f1": 0.9793939393939393,
+        "fpr": 4.411738754477915e-05,
+        "pr_auc": 0.9567844862923516,
+        "roc_auc": 0.978057472380282,
+        "tp": 1616,
+        "fp": 5,
+        "fn": 63,
+        "tn": 113329
+      },
+      "b_unknown_feature": {
+        "training_blocks": 345036,
+        "features": 45,
+        "pca_components_kept": 5,
+        "q_threshold": 7.565323684958802,
+        "precision": 0.9969154842689698,
+        "recall": 0.9624776652769506,
+        "f1": 0.9793939393939393,
+        "fpr": 4.411738754477915e-05,
+        "pr_auc": 0.9567844862923516,
+        "roc_auc": 0.978057472380282,
+        "tp": 1616,
+        "fp": 5,
+        "fn": 63,
+        "tn": 113329,
+        "test_blocks_with_unknown_template": 0,
+        "of_which_anomalous": 0
+      },
+      "c_train_lines_before_test_period": {
+        "training_blocks": 345036,
+        "features": 45,
+        "pca_components_kept": 5,
+        "q_threshold": 7.565831143805674,
+        "precision": 0.9969154842689698,
+        "recall": 0.9624776652769506,
+        "f1": 0.9793939393939393,
+        "fpr": 4.411738754477915e-05,
+        "pr_auc": 0.9585232343403312,
+        "roc_auc": 0.9791308728559173,
+        "tp": 1616,
+        "fp": 5,
+        "fn": 63,
+        "tn": 113329,
+        "test_blocks_with_unknown_template": 0,
+        "of_which_anomalous": 0
+      },
+      "d_train_lines_before_training_period_end": {
+        "training_blocks": 345036,
+        "features": 45,
+        "pca_components_kept": 5,
+        "q_threshold": 8.248975579740144,
+        "precision": 0.9969154842689698,
+        "recall": 0.9624776652769506,
+        "f1": 0.9793939393939393,
+        "fpr": 4.411738754477915e-05,
+        "pr_auc": 0.9875563643070452,
+        "roc_auc": 0.9998598123370884,
+        "tp": 1616,
+        "fp": 5,
+        "fn": 63,
+        "tn": 113329,
+        "test_blocks_with_unknown_template": 0,
+        "of_which_anomalous": 0
+      },
+      "e_complete_training_blocks_only": {
+        "training_blocks": 272913,
+        "features": 45,
+        "pca_components_kept": 5,
+        "q_threshold": 8.313970339952833,
+        "precision": 0.9969154842689698,
+        "recall": 0.9624776652769506,
+        "f1": 0.9793939393939393,
+        "fpr": 4.411738754477915e-05,
+        "pr_auc": 0.9585132249152108,
+        "roc_auc": 0.9790814372079562,
+        "tp": 1616,
+        "fp": 5,
+        "fn": 63,
+        "tn": 113329,
+        "test_blocks_with_unknown_template": 0,
+        "of_which_anomalous": 0
+      }
+    }
+  }
+}

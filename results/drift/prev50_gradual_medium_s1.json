@@ -1,0 +1,455 @@
+{
+  "scenario": {
+    "name": "prev50_gradual_medium_s1",
+    "type": "gradual",
+    "level": "medium",
+    "prevalence": 0.5,
+    "subset_seed": 1,
+    "statements": [
+      "S01",
+      "S02",
+      "S04",
+      "S05",
+      "S07",
+      "S10",
+      "S11"
+    ]
+  },
+  "settings": {
+    "onset": 0.25,
+    "ramp": 0.5,
+    "onset_test_line": 540859,
+    "ramp_lines": 1081718,
+    "test_period_lines": 2163436,
+    "gradual_seed": 0,
+    "window_blocks": 5000,
+    "q_threshold": 7.565323684958802,
+    "pca_components": 5
+  },
+  "parser": {
+    "lines_parsed": 2163436,
+    "eligible_lines_after_onset": 910535,
+    "lines_reworded": 606332,
+    "reworded_lines_absorbed": 468,
+    "reworded_lines_new_template": 605864,
+    "parse_seconds": 183.8,
+    "new_templates": [
+      {
+        "template_id": 47,
+        "first_seen_at_test_line": 541203,
+        "template": "BLOCK* NameSystem.allocateBlock: new block for <*> <BLK>"
+      },
+      {
+        "template_id": 48,
+        "first_seen_at_test_line": 541964,
+        "template": "BLOCK* NameSystem.addStoredBlock: block map updated: <IP> now stores <BLK> size <NUM>"
+      },
+      {
+        "template_id": 49,
+        "first_seen_at_test_line": 542051,
+        "template": "Started receiving block <BLK> from /<IP> to /<IP>"
+      },
+      {
+        "template_id": 50,
+        "first_seen_at_test_line": 545709,
+        "template": "Block <BLK> received, size <NUM>, from /<IP>"
+      },
+      {
+        "template_id": 51,
+        "first_seen_at_test_line": 552760,
+        "template": "Verification of block <BLK> succeeded"
+      },
+      {
+        "template_id": 52,
+        "first_seen_at_test_line": 677350,
+        "template": "<IP> has transmitted the block <BLK> to /<IP>"
+      }
+    ],
+    "original_templates_generalised": [
+      {
+        "template_id": 8,
+        "template_now": "<IP> <*> <*> <*> <*> block <BLK> to <IP>, <IP>"
+      },
+      {
+        "template_id": 12,
+        "template_now": "<IP> <*> <*> <*> <*> block <BLK> to <IP>"
+      }
+    ]
+  },
+  "blocks_scored": 115013,
+  "overall": {
+    "precision": 0.01922195720882142,
+    "recall": 0.9743895175699822,
+    "f1": 0.03770019587510081,
+    "fpr": 0.7365397850600879,
+    "tp": 1636,
+    "fp": 83475,
+    "fn": 43,
+    "tn": 29859,
+    "blocks": 115013,
+    "anomalous_blocks": 1679,
+    "normal_blocks_with_unknown_feature": 83474,
+    "pr_auc": 0.060884847113385654,
+    "roc_auc": 0.394014424551663
+  },
+  "by_phase": {
+    "before_onset": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "tp": 277,
+      "fp": 0,
+      "fn": 0,
+      "tn": 17504,
+      "blocks": 17781,
+      "anomalous_blocks": 277,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.9999999999999999,
+      "roc_auc": 1.0
+    },
+    "spanning_onset": {
+      "precision": 0.22328931572629052,
+      "recall": 0.8122270742358079,
+      "f1": 0.35028248587570615,
+      "fpr": 0.10088881958521753,
+      "tp": 186,
+      "fp": 647,
+      "fn": 43,
+      "tn": 5766,
+      "blocks": 6642,
+      "anomalous_blocks": 229,
+      "normal_blocks_with_unknown_feature": 646,
+      "pr_auc": 0.16901133267275595,
+      "roc_auc": 0.8858445965039626
+    },
+    "during_ramp": {
+      "precision": 0.012539344095847295,
+      "recall": 1.0,
+      "f1": 0.024768112308849337,
+      "fpr": 0.8985402359028056,
+      "tp": 741,
+      "fp": 58353,
+      "fn": 0,
+      "tn": 6589,
+      "blocks": 65683,
+      "anomalous_blocks": 741,
+      "normal_blocks_with_unknown_feature": 58353,
+      "pr_auc": 0.025202979849626626,
+      "roc_auc": 0.3113775850898368
+    },
+    "after_ramp": {
+      "precision": 0.017344521620427992,
+      "recall": 1.0,
+      "f1": 0.03409763605509294,
+      "fpr": 1.0,
+      "tp": 432,
+      "fp": 24475,
+      "fn": 0,
+      "tn": 0,
+      "blocks": 24907,
+      "anomalous_blocks": 432,
+      "normal_blocks_with_unknown_feature": 24475,
+      "pr_auc": 0.1907803344452347,
+      "roc_auc": 0.2953066242953883
+    }
+  },
+  "by_exposure": {
+    "with_reworded_lines": {
+      "precision": 0.011908143939393939,
+      "recall": 1.0,
+      "f1": 0.023536017593524083,
+      "fpr": 0.9999161485847079,
+      "tp": 1006,
+      "fp": 83474,
+      "fn": 0,
+      "tn": 7,
+      "blocks": 84487,
+      "anomalous_blocks": 1006,
+      "normal_blocks_with_unknown_feature": 83474,
+      "pr_auc": 0.09065724306865344,
+      "roc_auc": 0.3037298602701063
+    },
+    "without_reworded_lines": {
+      "precision": 0.9984152139461173,
+      "recall": 0.9361069836552749,
+      "f1": 0.9662576687116564,
+      "fpr": 3.349747094094396e-05,
+      "tp": 630,
+      "fp": 1,
+      "fn": 43,
+      "tn": 29852,
+      "blocks": 30526,
+      "anomalous_blocks": 673,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.9363787956083682,
+      "roc_auc": 0.9520814447454239
+    }
+  },
+  "windows": [
+    {
+      "window": 0,
+      "first_test_line": 0,
+      "blocks": 5000,
+      "anomalous": 237,
+      "fpr": 0.000419903422212891,
+      "recall": 0.8776371308016878,
+      "f1": 0.9306487695749441,
+      "precision": 0.9904761904761905,
+      "normal_blocks_with_unknown": 2
+    },
+    {
+      "window": 1,
+      "first_test_line": 64776,
+      "blocks": 5000,
+      "anomalous": 108,
+      "fpr": 0.024325429272281276,
+      "recall": 0.8703703703703703,
+      "f1": 0.5856697819314641,
+      "precision": 0.4413145539906103,
+      "normal_blocks_with_unknown": 118
+    },
+    {
+      "window": 2,
+      "first_test_line": 346851,
+      "blocks": 5000,
+      "anomalous": 51,
+      "fpr": 0.03839159426146696,
+      "recall": 1.0,
+      "f1": 0.3493150684931507,
+      "precision": 0.21161825726141079,
+      "normal_blocks_with_unknown": 190
+    },
+    {
+      "window": 3,
+      "first_test_line": 415789,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 0.036127460929571746,
+      "recall": 1.0,
+      "f1": 0.45061728395061734,
+      "precision": 0.2908366533864542,
+      "normal_blocks_with_unknown": 178
+    },
+    {
+      "window": 4,
+      "first_test_line": 483542,
+      "blocks": 5000,
+      "anomalous": 46,
+      "fpr": 0.043802987484860716,
+      "recall": 1.0,
+      "f1": 0.2977346278317152,
+      "precision": 0.17490494296577946,
+      "normal_blocks_with_unknown": 217
+    },
+    {
+      "window": 5,
+      "first_test_line": 548316,
+      "blocks": 5000,
+      "anomalous": 57,
+      "fpr": 0.34149302043293545,
+      "recall": 1.0,
+      "f1": 0.0632630410654828,
+      "precision": 0.032664756446991405,
+      "normal_blocks_with_unknown": 1688
+    },
+    {
+      "window": 6,
+      "first_test_line": 613268,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 0.6647165624369579,
+      "recall": 1.0,
+      "f1": 0.025436261461106183,
+      "precision": 0.012881965248651888,
+      "normal_blocks_with_unknown": 3295
+    },
+    {
+      "window": 7,
+      "first_test_line": 678208,
+      "blocks": 5000,
+      "anomalous": 63,
+      "fpr": 0.8310715009114847,
+      "recall": 1.0,
+      "f1": 0.02979427760699929,
+      "precision": 0.015122419587133942,
+      "normal_blocks_with_unknown": 4103
+    },
+    {
+      "window": 8,
+      "first_test_line": 743016,
+      "blocks": 5000,
+      "anomalous": 81,
+      "fpr": 0.9357593006708681,
+      "recall": 1.0,
+      "f1": 0.03399790136411333,
+      "precision": 0.017292912040990607,
+      "normal_blocks_with_unknown": 4603
+    },
+    {
+      "window": 9,
+      "first_test_line": 1020589,
+      "blocks": 5000,
+      "anomalous": 59,
+      "fpr": 0.9973689536531066,
+      "recall": 1.0,
+      "f1": 0.023384859294490683,
+      "precision": 0.011830759975937436,
+      "normal_blocks_with_unknown": 4928
+    },
+    {
+      "window": 10,
+      "first_test_line": 1088377,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.01705334126511997,
+      "precision": 0.0086,
+      "normal_blocks_with_unknown": 4957
+    },
+    {
+      "window": 11,
+      "first_test_line": 1159103,
+      "blocks": 5000,
+      "anomalous": 36,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.014297061159650515,
+      "precision": 0.0072,
+      "normal_blocks_with_unknown": 4964
+    },
+    {
+      "window": 12,
+      "first_test_line": 1224101,
+      "blocks": 5000,
+      "anomalous": 39,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.015479261758285373,
+      "precision": 0.0078,
+      "normal_blocks_with_unknown": 4961
+    },
+    {
+      "window": 13,
+      "first_test_line": 1289136,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.018624925698434713,
+      "precision": 0.0094,
+      "normal_blocks_with_unknown": 4953
+    },
+    {
+      "window": 14,
+      "first_test_line": 1353932,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.018624925698434713,
+      "precision": 0.0094,
+      "normal_blocks_with_unknown": 4953
+    },
+    {
+      "window": 15,
+      "first_test_line": 1418913,
+      "blocks": 5000,
+      "anomalous": 78,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.030720756203229616,
+      "precision": 0.0156,
+      "normal_blocks_with_unknown": 4922
+    },
+    {
+      "window": 16,
+      "first_test_line": 1491843,
+      "blocks": 5000,
+      "anomalous": 61,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.02410590792333531,
+      "precision": 0.0122,
+      "normal_blocks_with_unknown": 4939
+    },
+    {
+      "window": 17,
+      "first_test_line": 1556642,
+      "blocks": 5000,
+      "anomalous": 75,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.02955665024630542,
+      "precision": 0.015,
+      "normal_blocks_with_unknown": 4925
+    },
+    {
+      "window": 18,
+      "first_test_line": 1621225,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03381832481321274,
+      "precision": 0.0172,
+      "normal_blocks_with_unknown": 4914
+    },
+    {
+      "window": 19,
+      "first_test_line": 1686012,
+      "blocks": 5000,
+      "anomalous": 100,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.0392156862745098,
+      "precision": 0.02,
+      "normal_blocks_with_unknown": 4900
+    },
+    {
+      "window": 20,
+      "first_test_line": 1750600,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03381832481321274,
+      "precision": 0.0172,
+      "normal_blocks_with_unknown": 4914
+    },
+    {
+      "window": 21,
+      "first_test_line": 1815093,
+      "blocks": 5000,
+      "anomalous": 89,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03497740224012576,
+      "precision": 0.0178,
+      "normal_blocks_with_unknown": 4911
+    },
+    {
+      "window": 22,
+      "first_test_line": 1879854,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.028779814705302584,
+      "precision": 0.0146,
+      "normal_blocks_with_unknown": 4927
+    },
+    {
+      "window": 23,
+      "first_test_line": 1948467,
+      "blocks": 13,
+      "anomalous": 1,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.14285714285714288,
+      "precision": 0.07692307692307693,
+      "normal_blocks_with_unknown": 12
+    }
+  ]
+}

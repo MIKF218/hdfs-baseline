@@ -1,0 +1,440 @@
+{
+  "scenario": {
+    "name": "prev50_sudden_medium_s1",
+    "type": "sudden",
+    "level": "medium",
+    "prevalence": 0.5,
+    "subset_seed": 1,
+    "statements": [
+      "S01",
+      "S02",
+      "S04",
+      "S05",
+      "S07",
+      "S10",
+      "S11"
+    ]
+  },
+  "settings": {
+    "onset": 0.25,
+    "ramp": 0.5,
+    "onset_test_line": 540859,
+    "ramp_lines": 1081718,
+    "test_period_lines": 2163436,
+    "gradual_seed": 0,
+    "window_blocks": 5000,
+    "q_threshold": 7.565323684958802,
+    "pca_components": 5
+  },
+  "parser": {
+    "lines_parsed": 2163436,
+    "eligible_lines_after_onset": 910535,
+    "lines_reworded": 910535,
+    "reworded_lines_absorbed": 847,
+    "reworded_lines_new_template": 909688,
+    "parse_seconds": 178.1,
+    "new_templates": [
+      {
+        "template_id": 47,
+        "first_seen_at_test_line": 540860,
+        "template": "Block <BLK> received, size <NUM>, from /<IP>"
+      },
+      {
+        "template_id": 48,
+        "first_seen_at_test_line": 540861,
+        "template": "Started receiving block <BLK> from /<IP> to /<IP>"
+      },
+      {
+        "template_id": 49,
+        "first_seen_at_test_line": 540873,
+        "template": "BLOCK* NameSystem.addStoredBlock: block map updated: <IP> now stores <BLK> size <NUM>"
+      },
+      {
+        "template_id": 50,
+        "first_seen_at_test_line": 540876,
+        "template": "BLOCK* NameSystem.allocateBlock: new block for <*> <BLK>"
+      },
+      {
+        "template_id": 51,
+        "first_seen_at_test_line": 540920,
+        "template": "Verification of block <BLK> succeeded"
+      },
+      {
+        "template_id": 52,
+        "first_seen_at_test_line": 568031,
+        "template": "<IP> has transmitted the block <BLK> to /<IP>"
+      }
+    ],
+    "original_templates_generalised": [
+      {
+        "template_id": 8,
+        "template_now": "<IP> <*> <*> <*> <*> block <BLK> to <IP>, <IP>"
+      },
+      {
+        "template_id": 12,
+        "template_now": "<IP> <*> <*> <*> <*> block <BLK> to <IP>"
+      }
+    ]
+  },
+  "blocks_scored": 115013,
+  "overall": {
+    "precision": 0.017717025444549065,
+    "recall": 0.9749851101846337,
+    "f1": 0.034801649730005525,
+    "fpr": 0.8008188187128311,
+    "tp": 1637,
+    "fp": 90760,
+    "fn": 42,
+    "tn": 22574,
+    "blocks": 115013,
+    "anomalous_blocks": 1679,
+    "normal_blocks_with_unknown_feature": 90759,
+    "pr_auc": 0.03814572677236654,
+    "roc_auc": 0.3671711383514652
+  },
+  "by_phase": {
+    "before_onset": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "tp": 277,
+      "fp": 0,
+      "fn": 0,
+      "tn": 17504,
+      "blocks": 17781,
+      "anomalous_blocks": 277,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.9999999999999999,
+      "roc_auc": 1.0
+    },
+    "spanning_onset": {
+      "precision": 0.12222222222222222,
+      "recall": 0.8165938864628821,
+      "f1": 0.21262080727686186,
+      "fpr": 0.20941836893809448,
+      "tp": 187,
+      "fp": 1343,
+      "fn": 42,
+      "tn": 5070,
+      "blocks": 6642,
+      "anomalous_blocks": 229,
+      "normal_blocks_with_unknown_feature": 1342,
+      "pr_auc": 0.09869124566517841,
+      "roc_auc": 0.8008895686096132
+    },
+    "after_onset": {
+      "precision": 0.012948449056187217,
+      "recall": 1.0,
+      "f1": 0.0255658598781644,
+      "fpr": 1.0,
+      "tp": 1173,
+      "fp": 89417,
+      "fn": 0,
+      "tn": 0,
+      "blocks": 90590,
+      "anomalous_blocks": 1173,
+      "normal_blocks_with_unknown_feature": 89417,
+      "pr_auc": 0.047879903995200174,
+      "roc_auc": 0.2997320303737746
+    }
+  },
+  "by_exposure": {
+    "with_reworded_lines": {
+      "precision": 0.012845333913421797,
+      "recall": 1.0,
+      "f1": 0.0253648478860837,
+      "fpr": 1.0,
+      "tp": 1181,
+      "fp": 90759,
+      "fn": 0,
+      "tn": 0,
+      "blocks": 91940,
+      "anomalous_blocks": 1181,
+      "normal_blocks_with_unknown_feature": 90759,
+      "pr_auc": 0.04758919954671545,
+      "roc_auc": 0.3041873258914735
+    },
+    "without_reworded_lines": {
+      "precision": 0.9978118161925602,
+      "recall": 0.9156626506024096,
+      "f1": 0.9549738219895288,
+      "fpr": 4.4296788482835e-05,
+      "tp": 456,
+      "fp": 1,
+      "fn": 42,
+      "tn": 22574,
+      "blocks": 23073,
+      "anomalous_blocks": 498,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.9138679947418274,
+      "roc_auc": 0.9409457986986707
+    }
+  },
+  "windows": [
+    {
+      "window": 0,
+      "first_test_line": 0,
+      "blocks": 5000,
+      "anomalous": 237,
+      "fpr": 0.007978165022044929,
+      "recall": 0.8776371308016878,
+      "f1": 0.8612836438923396,
+      "precision": 0.8455284552845529,
+      "normal_blocks_with_unknown": 38
+    },
+    {
+      "window": 1,
+      "first_test_line": 64776,
+      "blocks": 5000,
+      "anomalous": 108,
+      "fpr": 0.03536385936222404,
+      "recall": 0.8796296296296297,
+      "f1": 0.5053191489361702,
+      "precision": 0.35447761194029853,
+      "normal_blocks_with_unknown": 172
+    },
+    {
+      "window": 2,
+      "first_test_line": 346851,
+      "blocks": 5000,
+      "anomalous": 51,
+      "fpr": 0.0571832693473429,
+      "recall": 1.0,
+      "f1": 0.26493506493506497,
+      "precision": 0.15269461077844312,
+      "normal_blocks_with_unknown": 283
+    },
+    {
+      "window": 3,
+      "first_test_line": 415789,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 0.052770448548812667,
+      "recall": 1.0,
+      "f1": 0.35960591133004927,
+      "precision": 0.21921921921921922,
+      "normal_blocks_with_unknown": 260
+    },
+    {
+      "window": 4,
+      "first_test_line": 483542,
+      "blocks": 5000,
+      "anomalous": 46,
+      "fpr": 0.23354864755752927,
+      "recall": 1.0,
+      "f1": 0.07365892714171338,
+      "precision": 0.038237738985868665,
+      "normal_blocks_with_unknown": 1157
+    },
+    {
+      "window": 5,
+      "first_test_line": 548316,
+      "blocks": 5000,
+      "anomalous": 57,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.02254300968953925,
+      "precision": 0.0114,
+      "normal_blocks_with_unknown": 4943
+    },
+    {
+      "window": 6,
+      "first_test_line": 613268,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.01705334126511997,
+      "precision": 0.0086,
+      "normal_blocks_with_unknown": 4957
+    },
+    {
+      "window": 7,
+      "first_test_line": 678208,
+      "blocks": 5000,
+      "anomalous": 63,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.024886430969780764,
+      "precision": 0.0126,
+      "normal_blocks_with_unknown": 4937
+    },
+    {
+      "window": 8,
+      "first_test_line": 743016,
+      "blocks": 5000,
+      "anomalous": 81,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.031883487502460145,
+      "precision": 0.0162,
+      "normal_blocks_with_unknown": 4919
+    },
+    {
+      "window": 9,
+      "first_test_line": 1020589,
+      "blocks": 5000,
+      "anomalous": 59,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.023324767740660206,
+      "precision": 0.0118,
+      "normal_blocks_with_unknown": 4941
+    },
+    {
+      "window": 10,
+      "first_test_line": 1088377,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.01705334126511997,
+      "precision": 0.0086,
+      "normal_blocks_with_unknown": 4957
+    },
+    {
+      "window": 11,
+      "first_test_line": 1159103,
+      "blocks": 5000,
+      "anomalous": 36,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.014297061159650515,
+      "precision": 0.0072,
+      "normal_blocks_with_unknown": 4964
+    },
+    {
+      "window": 12,
+      "first_test_line": 1224101,
+      "blocks": 5000,
+      "anomalous": 39,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.015479261758285373,
+      "precision": 0.0078,
+      "normal_blocks_with_unknown": 4961
+    },
+    {
+      "window": 13,
+      "first_test_line": 1289136,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.018624925698434713,
+      "precision": 0.0094,
+      "normal_blocks_with_unknown": 4953
+    },
+    {
+      "window": 14,
+      "first_test_line": 1353932,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.018624925698434713,
+      "precision": 0.0094,
+      "normal_blocks_with_unknown": 4953
+    },
+    {
+      "window": 15,
+      "first_test_line": 1418913,
+      "blocks": 5000,
+      "anomalous": 78,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.030720756203229616,
+      "precision": 0.0156,
+      "normal_blocks_with_unknown": 4922
+    },
+    {
+      "window": 16,
+      "first_test_line": 1491843,
+      "blocks": 5000,
+      "anomalous": 61,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.02410590792333531,
+      "precision": 0.0122,
+      "normal_blocks_with_unknown": 4939
+    },
+    {
+      "window": 17,
+      "first_test_line": 1556642,
+      "blocks": 5000,
+      "anomalous": 75,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.02955665024630542,
+      "precision": 0.015,
+      "normal_blocks_with_unknown": 4925
+    },
+    {
+      "window": 18,
+      "first_test_line": 1621225,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03381832481321274,
+      "precision": 0.0172,
+      "normal_blocks_with_unknown": 4914
+    },
+    {
+      "window": 19,
+      "first_test_line": 1686012,
+      "blocks": 5000,
+      "anomalous": 100,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.0392156862745098,
+      "precision": 0.02,
+      "normal_blocks_with_unknown": 4900
+    },
+    {
+      "window": 20,
+      "first_test_line": 1750600,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03381832481321274,
+      "precision": 0.0172,
+      "normal_blocks_with_unknown": 4914
+    },
+    {
+      "window": 21,
+      "first_test_line": 1815093,
+      "blocks": 5000,
+      "anomalous": 89,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03497740224012576,
+      "precision": 0.0178,
+      "normal_blocks_with_unknown": 4911
+    },
+    {
+      "window": 22,
+      "first_test_line": 1879854,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.028779814705302584,
+      "precision": 0.0146,
+      "normal_blocks_with_unknown": 4927
+    },
+    {
+      "window": 23,
+      "first_test_line": 1948467,
+      "blocks": 13,
+      "anomalous": 1,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.14285714285714288,
+      "precision": 0.07692307692307693,
+      "normal_blocks_with_unknown": 12
+    }
+  ]
+}

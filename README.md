@@ -62,7 +62,11 @@ hdfs-baseline/
     ├── export_counts.py              step 1: HDFS.log -> results/counts.csv
     ├── hdfs_baseline_pca_q.py        step 2: PRIMARY detector, PCA + Q-statistic
     ├── hdfs_baseline_v2.py           comparison detectors and shared helpers
-    └── hdfs_baseline.py              first run (Drain3 + Isolation Forest); parser used by step 1
+    ├── hdfs_baseline.py              first run (Drain3 + Isolation Forest); parser used by step 1
+    ├── check_parser_leakage.py       leakage check across the train/test split
+    ├── paraphrases.py                format-drift paraphrases of the 13 normal-event statements
+    ├── check_paraphrases.py          magnitude, Drain3 reaction and coverage of the paraphrases
+    └── run_drift.py                  sudden / gradual / prevalence drift scenarios
 ```
 
 ---
@@ -165,12 +169,49 @@ Keep these unchanged in the drift experiments so results stay comparable with th
 
 ---
 
-## Next: format-drift experiments
+## Format-drift experiments (group A)
 
-1. Semantics-preserving paraphrases of the 46 templates at low, medium and high rewording magnitude, checked by hand.
-2. Sudden and gradual drift injection into the replayed log stream.
-3. Templates first seen after rewording mapped to one shared "unknown" feature.
-4. Same pipeline and settings on the drifted streams, compared with this baseline (F1 and PR-AUC).
+Paraphrases of the 13 normal-event logging statements are in `src/paraphrases.py`
+(low / medium / high magnitude, parameters kept verbatim). Check them with:
+
+```bash
+python src/check_paraphrases.py --log data/HDFS.log --counts results/counts.csv --out results/drift/paraphrases_review.csv
+```
+
+Run the drift scenarios (the first run also builds the parser state at the start of the test period,
+about 4 minutes; each scenario then takes about 1 minute):
+
+```bash
+# core: no drift + sudden and gradual drift at low, medium and high magnitude (7 runs)
+python src/run_drift.py --log data/HDFS.log --labels data/anomaly_label.csv --counts results/counts.csv
+
+# prevalence: 25% and 50% of statements reworded, medium magnitude, 3 random subsets each (12 runs)
+python src/run_drift.py --log data/HDFS.log --labels data/anomaly_label.csv --counts results/counts.csv --scenarios prevalence
+```
+
+| Setting | Value |
+|---|---|
+| Model | PCA + Q-statistic fitted once on training blocks, frozen; unseen and new templates -> one UNKNOWN feature (main design) or dropped (`--unseen drop`, robustness check) |
+| Parser | warmed up on the log before the test period, then online through the test period |
+| Onset | 25% into the test period (share of test-period lines) |
+| Sudden | every eligible line reworded from the onset |
+| Gradual | probability of rewording rises linearly from 0 to 1 over the next 50% of the test period |
+| Scope | only the 13 normal-event statements; anomaly-only messages and all parameters unchanged |
+
+Robustness check (not the main design): lines with an unseen template are dropped instead of going
+to the UNKNOWN feature. Results go to `results/drift_drop/`; the parser state is reused.
+
+```bash
+python src/run_drift.py --log data/HDFS.log --labels data/anomaly_label.csv --counts results/counts.csv --unseen drop
+```
+
+Outputs in `results/drift/`: one `<scenario>.json` per run (parser statistics, metrics overall, by phase,
+by exposure and per window of 5,000 blocks) and `summary.csv` with one row per scenario. The `none`
+scenario must reproduce the baseline (1,616 caught, 5 false alarms, 63 missed).
+
+Phases: `before_onset` = blocks whose lines all precede the drift; `spanning_onset` = blocks that start
+before and continue after it; `after_onset` (sudden) or `during_ramp` / `after_ramp` (gradual) = blocks
+that start after it. Exposure: blocks with and without at least one reworded line.
 
 Groups B (semantic, fixed) and C (semantic, online and unsupervised) will be separate projects.
 

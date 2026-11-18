@@ -1,0 +1,494 @@
+{
+  "scenario": {
+    "name": "gradual_low",
+    "type": "gradual",
+    "level": "low",
+    "prevalence": 1.0,
+    "subset_seed": null,
+    "statements": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13"
+    ]
+  },
+  "settings": {
+    "unseen": "drop",
+    "onset": 0.25,
+    "ramp": 0.5,
+    "onset_test_line": 540859,
+    "ramp_lines": 1081718,
+    "test_period_lines": 2163436,
+    "gradual_seed": 0,
+    "window_blocks": 5000,
+    "q_threshold": 7.565323684958802,
+    "pca_components": 5
+  },
+  "parser": {
+    "lines_parsed": 2163436,
+    "eligible_lines_after_onset": 1620226,
+    "lines_reworded": 1079975,
+    "reworded_lines_absorbed": 683337,
+    "reworded_lines_new_template": 396638,
+    "test_block_lines_not_counted": 361510,
+    "parse_seconds": 186.7,
+    "new_templates": [
+      {
+        "template_id": 47,
+        "first_seen_at_test_line": 541782,
+        "template": "BLOCK* NameSystem.allocateBlock: file <*> <BLK>"
+      },
+      {
+        "template_id": 48,
+        "first_seen_at_test_line": 543182,
+        "template": "PacketResponder <NUM> for block <BLK> is terminating"
+      },
+      {
+        "template_id": 49,
+        "first_seen_at_test_line": 557309,
+        "template": "Verification succeeded for block <BLK>"
+      },
+      {
+        "template_id": 50,
+        "first_seen_at_test_line": 577366,
+        "template": "Deleting block <BLK> at file <*>"
+      },
+      {
+        "template_id": 51,
+        "first_seen_at_test_line": 580073,
+        "template": "<IP>:Sent block <BLK> to /<IP>"
+      },
+      {
+        "template_id": 52,
+        "first_seen_at_test_line": 744586,
+        "template": "<IP> Starting a thread to transfer block <BLK> to <IP>"
+      },
+      {
+        "template_id": 53,
+        "first_seen_at_test_line": 896072,
+        "template": "<IP> Served block <BLK> to client /<IP>"
+      },
+      {
+        "template_id": 54,
+        "first_seen_at_test_line": 896241,
+        "template": "<IP> Starting a thread to transfer block <BLK> to <IP>, <IP>"
+      },
+      {
+        "template_id": 55,
+        "first_seen_at_test_line": 896352,
+        "template": "BLOCK* ask <IP> to replicate <BLK> to target datanode(s) <IP> <IP>"
+      }
+    ],
+    "original_templates_generalised": [
+      {
+        "template_id": 1,
+        "template_now": "Receiving block <BLK> <*> /<IP> dest: /<IP>"
+      },
+      {
+        "template_id": 4,
+        "template_now": "Received block <BLK> <*> size <NUM> from /<IP>"
+      },
+      {
+        "template_id": 5,
+        "template_now": "BLOCK* NameSystem.addStoredBlock: blockMap updated: <IP> <*> added to <BLK> size <NUM>"
+      },
+      {
+        "template_id": 6,
+        "template_now": "Received block <BLK> <*> /<IP> dest: /<IP> of size <NUM>"
+      },
+      {
+        "template_id": 9,
+        "template_now": "BLOCK* ask <IP> to replicate <BLK> to <*> <*> <IP>"
+      },
+      {
+        "template_id": 32,
+        "template_now": "BLOCK* NameSystem.delete: <BLK> <*> added to invalidSet of <IP>"
+      }
+    ]
+  },
+  "blocks_scored": 115013,
+  "overall": {
+    "precision": 0.03599577297344899,
+    "recall": 0.9737939249553306,
+    "f1": 0.06942527759495554,
+    "fpr": 0.38635360968464894,
+    "tp": 1635,
+    "fp": 43787,
+    "fn": 44,
+    "tn": 69547,
+    "blocks": 115013,
+    "anomalous_blocks": 1679,
+    "normal_blocks_with_unknown_feature": 0,
+    "pr_auc": 0.7770738382571136,
+    "roc_auc": 0.9774033421146642
+  },
+  "by_phase": {
+    "before_onset": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "tp": 277,
+      "fp": 0,
+      "fn": 0,
+      "tn": 17504,
+      "blocks": 17781,
+      "anomalous_blocks": 277,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.9999999999999999,
+      "roc_auc": 1.0
+    },
+    "spanning_onset": {
+      "precision": 0.6560283687943262,
+      "recall": 0.8078602620087336,
+      "f1": 0.7240704500978473,
+      "fpr": 0.015125526274754405,
+      "tp": 185,
+      "fp": 97,
+      "fn": 44,
+      "tn": 6316,
+      "blocks": 6642,
+      "anomalous_blocks": 229,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.520899490864374,
+      "roc_auc": 0.9187533237957559
+    },
+    "during_ramp": {
+      "precision": 0.03713168971737823,
+      "recall": 1.0,
+      "f1": 0.07160458037396725,
+      "fpr": 0.29587940008007146,
+      "tp": 741,
+      "fp": 19215,
+      "fn": 0,
+      "tn": 45727,
+      "blocks": 65683,
+      "anomalous_blocks": 741,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.72504625733278,
+      "roc_auc": 0.9973779156661372
+    },
+    "after_ramp": {
+      "precision": 0.017344521620427992,
+      "recall": 1.0,
+      "f1": 0.03409763605509294,
+      "fpr": 1.0,
+      "tp": 432,
+      "fp": 24475,
+      "fn": 0,
+      "tn": 0,
+      "blocks": 24907,
+      "anomalous_blocks": 432,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 1.0,
+      "roc_auc": 1.0
+    }
+  },
+  "by_exposure": {
+    "with_reworded_lines": {
+      "precision": 0.026566182028366903,
+      "recall": 0.9660468876313663,
+      "f1": 0.05171033557627816,
+      "fpr": 0.4886941964285714,
+      "tp": 1195,
+      "fp": 43787,
+      "fn": 42,
+      "tn": 45813,
+      "blocks": 90837,
+      "anomalous_blocks": 1237,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.738258305750791,
+      "roc_auc": 0.9682904257853101
+    },
+    "without_reworded_lines": {
+      "precision": 1.0,
+      "recall": 0.995475113122172,
+      "f1": 0.9977324263038548,
+      "fpr": 0.0,
+      "tp": 440,
+      "fp": 0,
+      "fn": 2,
+      "tn": 23734,
+      "blocks": 24176,
+      "anomalous_blocks": 442,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.9977827767835694,
+      "roc_auc": 0.997934116701435
+    }
+  },
+  "windows": [
+    {
+      "window": 0,
+      "first_test_line": 0,
+      "blocks": 5000,
+      "anomalous": 237,
+      "fpr": 0.0,
+      "recall": 0.8776371308016878,
+      "f1": 0.9348314606741573,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 1,
+      "first_test_line": 64776,
+      "blocks": 5000,
+      "anomalous": 108,
+      "fpr": 0.001839738348323794,
+      "recall": 0.8611111111111112,
+      "f1": 0.8857142857142858,
+      "precision": 0.9117647058823529,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 2,
+      "first_test_line": 346851,
+      "blocks": 5000,
+      "anomalous": 51,
+      "fpr": 0.0018185492018589614,
+      "recall": 1.0,
+      "f1": 0.9189189189189189,
+      "precision": 0.85,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 3,
+      "first_test_line": 415789,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 0.006697787700426223,
+      "recall": 1.0,
+      "f1": 0.8156424581005586,
+      "precision": 0.6886792452830188,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 4,
+      "first_test_line": 483542,
+      "blocks": 5000,
+      "anomalous": 46,
+      "fpr": 0.009689140088817117,
+      "recall": 1.0,
+      "f1": 0.6571428571428571,
+      "precision": 0.48936170212765956,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 5,
+      "first_test_line": 548316,
+      "blocks": 5000,
+      "anomalous": 57,
+      "fpr": 0.009508395711106616,
+      "recall": 1.0,
+      "f1": 0.7080745341614907,
+      "precision": 0.5480769230769231,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 6,
+      "first_test_line": 613268,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 0.010086746015735323,
+      "recall": 1.0,
+      "f1": 0.6323529411764706,
+      "precision": 0.46236559139784944,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 7,
+      "first_test_line": 678208,
+      "blocks": 5000,
+      "anomalous": 63,
+      "fpr": 0.011950577273647964,
+      "recall": 1.0,
+      "f1": 0.6810810810810811,
+      "precision": 0.5163934426229508,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 8,
+      "first_test_line": 743016,
+      "blocks": 5000,
+      "anomalous": 81,
+      "fpr": 0.02236226875381175,
+      "recall": 1.0,
+      "f1": 0.5955882352941176,
+      "precision": 0.42408376963350786,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 9,
+      "first_test_line": 1020589,
+      "blocks": 5000,
+      "anomalous": 59,
+      "fpr": 0.06860959319975714,
+      "recall": 1.0,
+      "f1": 0.25820568927789933,
+      "precision": 0.14824120603015076,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 10,
+      "first_test_line": 1088377,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 0.08452693161186202,
+      "recall": 1.0,
+      "f1": 0.17029702970297028,
+      "precision": 0.09307359307359307,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 11,
+      "first_test_line": 1159103,
+      "blocks": 5000,
+      "anomalous": 36,
+      "fpr": 0.13920225624496374,
+      "recall": 1.0,
+      "f1": 0.09436435124508517,
+      "precision": 0.04951856946354883,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 12,
+      "first_test_line": 1224101,
+      "blocks": 5000,
+      "anomalous": 39,
+      "fpr": 0.19290465631929046,
+      "recall": 1.0,
+      "f1": 0.07536231884057971,
+      "precision": 0.0391566265060241,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 13,
+      "first_test_line": 1289136,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 0.28507974964667876,
+      "recall": 1.0,
+      "f1": 0.062416998671978745,
+      "precision": 0.03221384509938314,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 14,
+      "first_test_line": 1353932,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 0.3949121744397335,
+      "recall": 1.0,
+      "f1": 0.04585365853658537,
+      "precision": 0.023464802795806292,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 15,
+      "first_test_line": 1418913,
+      "blocks": 5000,
+      "anomalous": 78,
+      "fpr": 0.6757415684681024,
+      "recall": 1.0,
+      "f1": 0.04480183802412407,
+      "precision": 0.022914218566392478,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 16,
+      "first_test_line": 1491843,
+      "blocks": 5000,
+      "anomalous": 61,
+      "fpr": 0.9789431058918809,
+      "recall": 1.0,
+      "f1": 0.02461166027839419,
+      "precision": 0.012459150326797386,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 17,
+      "first_test_line": 1556642,
+      "blocks": 5000,
+      "anomalous": 75,
+      "fpr": 0.996751269035533,
+      "recall": 1.0,
+      "f1": 0.029650128483890096,
+      "precision": 0.015048154093097914,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 18,
+      "first_test_line": 1621225,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03381832481321274,
+      "precision": 0.0172,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 19,
+      "first_test_line": 1686012,
+      "blocks": 5000,
+      "anomalous": 100,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.0392156862745098,
+      "precision": 0.02,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 20,
+      "first_test_line": 1750600,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03381832481321274,
+      "precision": 0.0172,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 21,
+      "first_test_line": 1815093,
+      "blocks": 5000,
+      "anomalous": 89,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03497740224012576,
+      "precision": 0.0178,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 22,
+      "first_test_line": 1879854,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.028779814705302584,
+      "precision": 0.0146,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 23,
+      "first_test_line": 1948467,
+      "blocks": 13,
+      "anomalous": 1,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.14285714285714288,
+      "precision": 0.07692307692307693,
+      "normal_blocks_with_unknown": 0
+    }
+  ]
+}

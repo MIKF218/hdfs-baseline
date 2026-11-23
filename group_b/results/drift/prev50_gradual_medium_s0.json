@@ -1,0 +1,480 @@
+{
+  "group": "B",
+  "scenario": {
+    "name": "prev50_gradual_medium_s0",
+    "type": "gradual",
+    "level": "medium",
+    "prevalence": 0.5,
+    "subset_seed": 0,
+    "statements": [
+      "S01",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S08",
+      "S13"
+    ]
+  },
+  "settings": {
+    "embedder": "sbert",
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "masking": "drain3 + file paths",
+    "block_vector": "TF-IDF-weighted sum of L2-normalised message embeddings",
+    "unseen_weight": "nearest",
+    "onset": 0.25,
+    "ramp": 0.5,
+    "onset_test_line": 540859,
+    "ramp_lines": 1081718,
+    "test_period_lines": 2163436,
+    "gradual_seed": 0,
+    "window_blocks": 5000,
+    "q_threshold": 19.229774473008153,
+    "pca_components": 3
+  },
+  "drift_matches_group_a": true,
+  "parser": {
+    "lines_parsed": 2163436,
+    "eligible_lines_after_onset": 1304305,
+    "lines_reworded": 863421,
+    "parse_seconds": 173.6,
+    "reworded_lines_sha1": "f9db944f40869c98826cc34e1ff0f50ea05e0262",
+    "new_messages": [
+      "Responder thread <NUM> of block <BLK> terminating",
+      "Started receiving block <BLK> from /<IP> to /<IP>",
+      "BLOCK* NameSystem.addStoredBlock: block map updated: <IP> now stores <BLK> size <NUM>",
+      "Block <BLK> received, size <NUM>, from /<IP>",
+      "Finished receiving block <BLK> from /<IP> to /<IP>, size <NUM>",
+      "BLOCK* NameSystem.delete: <BLK> is marked as invalid on <IP>",
+      "<IP> finished serving block <BLK> to reader /<IP>"
+    ],
+    "unseen_message_weights": {
+      "Adding an already existing block <BLK>": {
+        "nearest_training_message": "BLOCK* Removing block <BLK> from neededReplications as it does not belong to any file.",
+        "cosine": 0.668,
+        "weight": 12.142
+      },
+      "Exception in receiveBlock for block <BLK> java.io.IOException: Broken pipe": {
+        "nearest_training_message": "writeBlock <BLK> received exception java.io.IOException: Broken pipe",
+        "cosine": 0.883,
+        "weight": 12.653
+      },
+      "PacketResponder <BLK> <NUM> Exception java.io.IOException: The stream is closed": {
+        "nearest_training_message": "PacketResponder <BLK> <NUM> Exception java.io.IOException: Broken pipe",
+        "cosine": 0.835,
+        "weight": 12.142
+      },
+      "Responder thread <NUM> of block <BLK> terminating": {
+        "nearest_training_message": "PacketResponder <NUM> for block <BLK> terminating",
+        "cosine": 0.752,
+        "weight": 1.012
+      },
+      "Started receiving block <BLK> from /<IP> to /<IP>": {
+        "nearest_training_message": "Receiving block <BLK> src: /<IP> dest: /<IP>",
+        "cosine": 0.832,
+        "weight": 1.0
+      },
+      "BLOCK* NameSystem.addStoredBlock: block map updated: <IP> now stores <BLK> size <NUM>": {
+        "nearest_training_message": "BLOCK* NameSystem.addStoredBlock: blockMap updated: <IP> is added to <BLK> size <NUM>",
+        "cosine": 0.961,
+        "weight": 1.012
+      },
+      "Block <BLK> received, size <NUM>, from /<IP>": {
+        "nearest_training_message": "Received block <BLK> of size <NUM> from /<IP>",
+        "cosine": 0.939,
+        "weight": 1.012
+      },
+      "Finished receiving block <BLK> from /<IP> to /<IP>, size <NUM>": {
+        "nearest_training_message": "Received block <BLK> of size <NUM> from /<IP>",
+        "cosine": 0.927,
+        "weight": 1.012
+      },
+      "BLOCK* NameSystem.delete: <BLK> is marked as invalid on <IP>": {
+        "nearest_training_message": "BLOCK* NameSystem.delete: <BLK> is added to invalidSet of <IP>",
+        "cosine": 0.976,
+        "weight": 1.083
+      },
+      "<IP> finished serving block <BLK> to reader /<IP>": {
+        "nearest_training_message": "<IP> Served block <BLK> to /<IP>",
+        "cosine": 0.88,
+        "weight": 1.921
+      }
+    }
+  },
+  "blocks_scored": 115013,
+  "overall": {
+    "precision": 0.7390519187358916,
+    "recall": 0.9749851101846337,
+    "f1": 0.8407806882383153,
+    "fpr": 0.00509997000017647,
+    "tp": 1637,
+    "fp": 578,
+    "fn": 42,
+    "tn": 112756,
+    "blocks": 115013,
+    "anomalous_blocks": 1679,
+    "normal_blocks_with_unknown_feature": 0,
+    "pr_auc": 0.742160731358954,
+    "roc_auc": 0.9962237618340886
+  },
+  "by_phase": {
+    "before_onset": {
+      "precision": 0.9787985865724381,
+      "recall": 1.0,
+      "f1": 0.9892857142857143,
+      "fpr": 0.00034277879341864715,
+      "tp": 277,
+      "fp": 6,
+      "fn": 0,
+      "tn": 17498,
+      "blocks": 17781,
+      "anomalous_blocks": 277,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.970591706058579,
+      "roc_auc": 0.9997349754816227
+    },
+    "spanning_onset": {
+      "precision": 0.5095367847411444,
+      "recall": 0.8165938864628821,
+      "f1": 0.6275167785234899,
+      "fpr": 0.028067986901606112,
+      "tp": 187,
+      "fp": 180,
+      "fn": 42,
+      "tn": 6233,
+      "blocks": 6642,
+      "anomalous_blocks": 229,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.4866572237300577,
+      "roc_auc": 0.9761966856351422
+    },
+    "during_ramp": {
+      "precision": 0.6540158870255958,
+      "recall": 1.0,
+      "f1": 0.7908217716115261,
+      "fpr": 0.006036155338609837,
+      "tp": 741,
+      "fp": 392,
+      "fn": 0,
+      "tn": 64550,
+      "blocks": 65683,
+      "anomalous_blocks": 741,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.6725198598155654,
+      "roc_auc": 0.9967056870552946
+    },
+    "after_ramp": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "fpr": 0.0,
+      "tp": 432,
+      "fp": 0,
+      "fn": 0,
+      "tn": 24475,
+      "blocks": 24907,
+      "anomalous_blocks": 432,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.9999999999999998,
+      "roc_auc": 1.0
+    }
+  },
+  "by_exposure": {
+    "with_reworded_lines": {
+      "precision": 0.6786377708978328,
+      "recall": 0.969053934571176,
+      "f1": 0.7982520029133285,
+      "fpr": 0.005948969533023085,
+      "tp": 1096,
+      "fp": 519,
+      "fn": 35,
+      "tn": 86723,
+      "blocks": 88373,
+      "anomalous_blocks": 1131,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.7184919795374619,
+      "roc_auc": 0.9954829347418649
+    },
+    "without_reworded_lines": {
+      "precision": 0.9016666666666666,
+      "recall": 0.9872262773722628,
+      "f1": 0.9425087108013936,
+      "fpr": 0.0022612294956308445,
+      "tp": 541,
+      "fp": 59,
+      "fn": 7,
+      "tn": 26033,
+      "blocks": 26640,
+      "anomalous_blocks": 548,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.883177953058771,
+      "roc_auc": 0.9982723960472264
+    }
+  },
+  "windows": [
+    {
+      "window": 0,
+      "first_test_line": 0,
+      "blocks": 5000,
+      "anomalous": 237,
+      "fpr": 0.0,
+      "recall": 0.8776371308016878,
+      "f1": 0.9348314606741573,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 1,
+      "first_test_line": 64776,
+      "blocks": 5000,
+      "anomalous": 108,
+      "fpr": 0.008176614881439084,
+      "recall": 0.8796296296296297,
+      "f1": 0.7818930041152263,
+      "precision": 0.7037037037037037,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 2,
+      "first_test_line": 346851,
+      "blocks": 5000,
+      "anomalous": 51,
+      "fpr": 0.009900990099009901,
+      "recall": 1.0,
+      "f1": 0.6754966887417219,
+      "precision": 0.51,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 3,
+      "first_test_line": 415789,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 0.008524457073269738,
+      "recall": 1.0,
+      "f1": 0.7765957446808511,
+      "precision": 0.6347826086956522,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 4,
+      "first_test_line": 483542,
+      "blocks": 5000,
+      "anomalous": 46,
+      "fpr": 0.011909568025837708,
+      "recall": 1.0,
+      "f1": 0.609271523178808,
+      "precision": 0.4380952380952381,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 5,
+      "first_test_line": 548316,
+      "blocks": 5000,
+      "anomalous": 57,
+      "fpr": 0.01213837750354036,
+      "recall": 1.0,
+      "f1": 0.6551724137931034,
+      "precision": 0.48717948717948717,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 6,
+      "first_test_line": 613268,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 0.012709299979826508,
+      "recall": 1.0,
+      "f1": 0.5771812080536913,
+      "precision": 0.4056603773584906,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 7,
+      "first_test_line": 678208,
+      "blocks": 5000,
+      "anomalous": 63,
+      "fpr": 0.01174802511646749,
+      "recall": 1.0,
+      "f1": 0.6847826086956522,
+      "precision": 0.5206611570247934,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 8,
+      "first_test_line": 743016,
+      "blocks": 5000,
+      "anomalous": 81,
+      "fpr": 0.00975808091075422,
+      "recall": 1.0,
+      "f1": 0.7714285714285715,
+      "precision": 0.627906976744186,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 9,
+      "first_test_line": 1020589,
+      "blocks": 5000,
+      "anomalous": 59,
+      "fpr": 0.012143290831815421,
+      "recall": 1.0,
+      "f1": 0.6629213483146068,
+      "precision": 0.4957983193277311,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 10,
+      "first_test_line": 1088377,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 0.0016138793625176519,
+      "recall": 1.0,
+      "f1": 0.9148936170212766,
+      "precision": 0.8431372549019608,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 11,
+      "first_test_line": 1159103,
+      "blocks": 5000,
+      "anomalous": 36,
+      "fpr": 0.0032232070910556,
+      "recall": 1.0,
+      "f1": 0.8181818181818181,
+      "precision": 0.6923076923076923,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 12,
+      "first_test_line": 1224101,
+      "blocks": 5000,
+      "anomalous": 39,
+      "fpr": 0.002620439427534771,
+      "recall": 1.0,
+      "f1": 0.8571428571428571,
+      "precision": 0.75,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 13,
+      "first_test_line": 1289136,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 0.0032303654350898446,
+      "recall": 1.0,
+      "f1": 0.8545454545454546,
+      "precision": 0.746031746031746,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 14,
+      "first_test_line": 1353932,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 0.0060569351907934586,
+      "recall": 1.0,
+      "f1": 0.7580645161290321,
+      "precision": 0.6103896103896104,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 15,
+      "first_test_line": 1418913,
+      "blocks": 5000,
+      "anomalous": 78,
+      "fpr": 0.003250711093051605,
+      "recall": 1.0,
+      "f1": 0.9069767441860465,
+      "precision": 0.8297872340425532,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 16,
+      "first_test_line": 1491843,
+      "blocks": 5000,
+      "anomalous": 61,
+      "fpr": 0.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 17,
+      "first_test_line": 1556642,
+      "blocks": 5000,
+      "anomalous": 75,
+      "fpr": 0.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 18,
+      "first_test_line": 1621225,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 0.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 19,
+      "first_test_line": 1686012,
+      "blocks": 5000,
+      "anomalous": 100,
+      "fpr": 0.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 20,
+      "first_test_line": 1750600,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 0.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 21,
+      "first_test_line": 1815093,
+      "blocks": 5000,
+      "anomalous": 89,
+      "fpr": 0.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 22,
+      "first_test_line": 1879854,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 0.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 23,
+      "first_test_line": 1948467,
+      "blocks": 13,
+      "anomalous": 1,
+      "fpr": 0.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "precision": 1.0,
+      "normal_blocks_with_unknown": 0
+    }
+  ]
+}

@@ -1,0 +1,534 @@
+{
+  "group": "B",
+  "scenario": {
+    "name": "gradual_high",
+    "type": "gradual",
+    "level": "high",
+    "prevalence": 1.0,
+    "subset_seed": null,
+    "statements": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13"
+    ]
+  },
+  "settings": {
+    "embedder": "sbert",
+    "model": "sentence-transformers/all-MiniLM-L6-v2",
+    "masking": "drain3 + file paths",
+    "block_vector": "TF-IDF-weighted sum of L2-normalised message embeddings",
+    "unseen_weight": "nearest",
+    "onset": 0.25,
+    "ramp": 0.5,
+    "onset_test_line": 540859,
+    "ramp_lines": 1081718,
+    "test_period_lines": 2163436,
+    "gradual_seed": 0,
+    "window_blocks": 5000,
+    "q_threshold": 19.229774473008153,
+    "pca_components": 3
+  },
+  "drift_matches_group_a": true,
+  "parser": {
+    "lines_parsed": 2163436,
+    "eligible_lines_after_onset": 1620226,
+    "lines_reworded": 1079975,
+    "parse_seconds": 194.8,
+    "reworded_lines_sha1": "b16eebea62cd90d3a5b5df3f60966efaa7bdb93a",
+    "new_messages": [
+      "Finished receiving <NUM> bytes for <BLK> sent by /<IP>",
+      "New storage block <BLK> reserved for file <PATH>",
+      "Acknowledgement handler <NUM> assigned to <BLK> has stopped (terminating)",
+      "Incoming transfer of <BLK> has started with sender /<IP> and receiver /<IP>",
+      "Replica of <BLK> with <NUM> bytes registered on datanode <IP>",
+      "Integrity scan passed: no corruption found in <BLK>",
+      "Block file <PATH> for <BLK> is being deleted from disk",
+      "Block <BLK> was successfully sent from <IP> to /<IP>",
+      "Replication scheduled: datanode <IP> will send a copy of <BLK> onto <IP>",
+      "Transfer of <BLK> completed: <NUM> bytes moved from /<IP> to /<IP>",
+      "Background copy of <BLK> from <IP> towards <IP> has been started",
+      "Scheduled removal of <BLK> from datanode <IP> (block invalidated)",
+      "Read request for <BLK> completed by <IP> for client /<IP>",
+      "Background copy of <BLK> from <IP> towards <IP>, <IP> has been started",
+      "Replication scheduled: datanode <IP> will send a copy of <BLK> onto <IP> <IP>"
+    ],
+    "unseen_message_weights": {
+      "Adding an already existing block <BLK>": {
+        "nearest_training_message": "BLOCK* Removing block <BLK> from neededReplications as it does not belong to any file.",
+        "cosine": 0.668,
+        "weight": 12.142
+      },
+      "Exception in receiveBlock for block <BLK> java.io.IOException: Broken pipe": {
+        "nearest_training_message": "writeBlock <BLK> received exception java.io.IOException: Broken pipe",
+        "cosine": 0.883,
+        "weight": 12.653
+      },
+      "PacketResponder <BLK> <NUM> Exception java.io.IOException: The stream is closed": {
+        "nearest_training_message": "PacketResponder <BLK> <NUM> Exception java.io.IOException: Broken pipe",
+        "cosine": 0.835,
+        "weight": 12.142
+      },
+      "Finished receiving <NUM> bytes for <BLK> sent by /<IP>": {
+        "nearest_training_message": "Received block <BLK> of size <NUM> from /<IP>",
+        "cosine": 0.762,
+        "weight": 1.012
+      },
+      "New storage block <BLK> reserved for file <PATH>": {
+        "nearest_training_message": "Deleting block <BLK> file <PATH>",
+        "cosine": 0.674,
+        "weight": 1.08
+      },
+      "Acknowledgement handler <NUM> assigned to <BLK> has stopped (terminating)": {
+        "nearest_training_message": "PacketResponder <NUM> for block <BLK> terminating",
+        "cosine": 0.61,
+        "weight": 1.012
+      },
+      "Incoming transfer of <BLK> has started with sender /<IP> and receiver /<IP>": {
+        "nearest_training_message": "<IP>:Transmitted block <BLK> to /<IP>",
+        "cosine": 0.717,
+        "weight": 5.799
+      },
+      "Replica of <BLK> with <NUM> bytes registered on datanode <IP>": {
+        "nearest_training_message": "BLOCK* ask <IP> to replicate <BLK> to datanode(s) <IP>",
+        "cosine": 0.773,
+        "weight": 5.814
+      },
+      "Integrity scan passed: no corruption found in <BLK>": {
+        "nearest_training_message": "Verification succeeded for <BLK>",
+        "cosine": 0.729,
+        "weight": 2.514
+      },
+      "Block file <PATH> for <BLK> is being deleted from disk": {
+        "nearest_training_message": "Deleting block <BLK> file <PATH>",
+        "cosine": 0.905,
+        "weight": 1.08
+      },
+      "Block <BLK> was successfully sent from <IP> to /<IP>": {
+        "nearest_training_message": "<IP>:Transmitted block <BLK> to /<IP>",
+        "cosine": 0.839,
+        "weight": 5.799
+      },
+      "Replication scheduled: datanode <IP> will send a copy of <BLK> onto <IP>": {
+        "nearest_training_message": "BLOCK* ask <IP> to replicate <BLK> to datanode(s) <IP>",
+        "cosine": 0.816,
+        "weight": 5.814
+      },
+      "Transfer of <BLK> completed: <NUM> bytes moved from /<IP> to /<IP>": {
+        "nearest_training_message": "<IP>:Transmitted block <BLK> to /<IP>",
+        "cosine": 0.702,
+        "weight": 5.799
+      },
+      "Background copy of <BLK> from <IP> towards <IP> has been started": {
+        "nearest_training_message": "<IP> Starting thread to transfer block <BLK> to <IP>, <IP>",
+        "cosine": 0.662,
+        "weight": 9.447
+      },
+      "Scheduled removal of <BLK> from datanode <IP> (block invalidated)": {
+        "nearest_training_message": "BLOCK* ask <IP> to replicate <BLK> to datanode(s) <IP>",
+        "cosine": 0.666,
+        "weight": 5.814
+      },
+      "Read request for <BLK> completed by <IP> for client /<IP>": {
+        "nearest_training_message": "<IP> Served block <BLK> to /<IP>",
+        "cosine": 0.755,
+        "weight": 1.921
+      },
+      "Background copy of <BLK> from <IP> towards <IP>, <IP> has been started": {
+        "nearest_training_message": "<IP> Starting thread to transfer block <BLK> to <IP>, <IP>",
+        "cosine": 0.671,
+        "weight": 9.447
+      },
+      "Replication scheduled: datanode <IP> will send a copy of <BLK> onto <IP> <IP>": {
+        "nearest_training_message": "BLOCK* ask <IP> to replicate <BLK> to datanode(s) <IP>",
+        "cosine": 0.816,
+        "weight": 5.814
+      }
+    }
+  },
+  "blocks_scored": 115013,
+  "overall": {
+    "precision": 0.019929575777900208,
+    "recall": 0.9910661107802263,
+    "f1": 0.0390734152841863,
+    "fpr": 0.7220251645578556,
+    "tp": 1664,
+    "fp": 81830,
+    "fn": 15,
+    "tn": 31504,
+    "blocks": 115013,
+    "anomalous_blocks": 1679,
+    "normal_blocks_with_unknown_feature": 0,
+    "pr_auc": 0.10500629004765363,
+    "roc_auc": 0.4374059930467634
+  },
+  "by_phase": {
+    "before_onset": {
+      "precision": 0.9787985865724381,
+      "recall": 1.0,
+      "f1": 0.9892857142857143,
+      "fpr": 0.00034277879341864715,
+      "tp": 277,
+      "fp": 6,
+      "fn": 0,
+      "tn": 17498,
+      "blocks": 17781,
+      "anomalous_blocks": 277,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.970591706058579,
+      "roc_auc": 0.9997349754816227
+    },
+    "spanning_onset": {
+      "precision": 0.0904480135249366,
+      "recall": 0.9344978165938864,
+      "f1": 0.1649325626204239,
+      "fpr": 0.33556837673475753,
+      "tp": 214,
+      "fp": 2152,
+      "fn": 15,
+      "tn": 4261,
+      "blocks": 6642,
+      "anomalous_blocks": 229,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.14857806437517018,
+      "roc_auc": 0.8272416087137412
+    },
+    "during_ramp": {
+      "precision": 0.013246808967070686,
+      "recall": 1.0,
+      "f1": 0.026147250304345525,
+      "fpr": 0.8499430260848141,
+      "tp": 741,
+      "fp": 55197,
+      "fn": 0,
+      "tn": 9745,
+      "blocks": 65683,
+      "anomalous_blocks": 741,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.0550927293010174,
+      "roc_auc": 0.37786857750906644
+    },
+    "after_ramp": {
+      "precision": 0.017344521620427992,
+      "recall": 1.0,
+      "f1": 0.03409763605509294,
+      "fpr": 1.0,
+      "tp": 432,
+      "fp": 24475,
+      "fn": 0,
+      "tn": 0,
+      "blocks": 24907,
+      "anomalous_blocks": 432,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.3040825335680856,
+      "roc_auc": 0.29398148148148145
+    }
+  },
+  "by_exposure": {
+    "with_reworded_lines": {
+      "precision": 0.01473050286058416,
+      "recall": 0.9886822958771221,
+      "f1": 0.029028506325508536,
+      "fpr": 0.91296875,
+      "tp": 1223,
+      "fp": 81802,
+      "fn": 14,
+      "tn": 7798,
+      "blocks": 90837,
+      "anomalous_blocks": 1237,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.13574074656564472,
+      "roc_auc": 0.34472476253031525
+    },
+    "without_reworded_lines": {
+      "precision": 0.9402985074626866,
+      "recall": 0.997737556561086,
+      "f1": 0.9681668496158068,
+      "fpr": 0.0011797421420746607,
+      "tp": 441,
+      "fp": 28,
+      "fn": 1,
+      "tn": 23706,
+      "blocks": 24176,
+      "anomalous_blocks": 442,
+      "normal_blocks_with_unknown_feature": 0,
+      "pr_auc": 0.9289276762226488,
+      "roc_auc": 0.9990752522204052
+    }
+  },
+  "windows": [
+    {
+      "window": 0,
+      "first_test_line": 0,
+      "blocks": 5000,
+      "anomalous": 237,
+      "fpr": 0.33046399328154524,
+      "recall": 0.9493670886075949,
+      "f1": 0.22102161100196463,
+      "precision": 0.12506948304613674,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 1,
+      "first_test_line": 64776,
+      "blocks": 5000,
+      "anomalous": 108,
+      "fpr": 0.08994276369582993,
+      "recall": 0.9722222222222222,
+      "f1": 0.3215926493108729,
+      "precision": 0.1926605504587156,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 2,
+      "first_test_line": 346851,
+      "blocks": 5000,
+      "anomalous": 51,
+      "fpr": 0.009496868054152355,
+      "recall": 1.0,
+      "f1": 0.6845637583892618,
+      "precision": 0.5204081632653061,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 3,
+      "first_test_line": 415789,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 0.008118530545971179,
+      "recall": 1.0,
+      "f1": 0.7849462365591399,
+      "precision": 0.6460176991150443,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 4,
+      "first_test_line": 483542,
+      "blocks": 5000,
+      "anomalous": 46,
+      "fpr": 0.017157852240613645,
+      "recall": 1.0,
+      "f1": 0.519774011299435,
+      "precision": 0.3511450381679389,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 5,
+      "first_test_line": 548316,
+      "blocks": 5000,
+      "anomalous": 57,
+      "fpr": 0.21424236293748736,
+      "recall": 1.0,
+      "f1": 0.09718670076726343,
+      "precision": 0.051075268817204304,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 6,
+      "first_test_line": 613268,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 0.47205971353641313,
+      "recall": 1.0,
+      "f1": 0.03544929925803792,
+      "precision": 0.0180444817456987,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 7,
+      "first_test_line": 678208,
+      "blocks": 5000,
+      "anomalous": 63,
+      "fpr": 0.6475592465059753,
+      "recall": 1.0,
+      "f1": 0.037917544387601566,
+      "precision": 0.01932515337423313,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 8,
+      "first_test_line": 743016,
+      "blocks": 5000,
+      "anomalous": 81,
+      "fpr": 0.83553567798333,
+      "recall": 1.0,
+      "f1": 0.03792134831460674,
+      "precision": 0.019327129563350035,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 9,
+      "first_test_line": 1020589,
+      "blocks": 5000,
+      "anomalous": 59,
+      "fpr": 0.9801659583080348,
+      "recall": 1.0,
+      "f1": 0.023785527111469466,
+      "precision": 0.012035903712770298,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 10,
+      "first_test_line": 1088377,
+      "blocks": 5000,
+      "anomalous": 43,
+      "fpr": 0.993746217470244,
+      "recall": 1.0,
+      "f1": 0.017158818834796485,
+      "precision": 0.008653652646407727,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 11,
+      "first_test_line": 1159103,
+      "blocks": 5000,
+      "anomalous": 36,
+      "fpr": 0.9963738920225624,
+      "recall": 1.0,
+      "f1": 0.01434834595456357,
+      "precision": 0.0072260136491368926,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 12,
+      "first_test_line": 1224101,
+      "blocks": 5000,
+      "anomalous": 39,
+      "fpr": 0.9989921386817174,
+      "recall": 1.0,
+      "f1": 0.015494636471990463,
+      "precision": 0.007807807807807808,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 13,
+      "first_test_line": 1289136,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 0.9995962043206138,
+      "recall": 1.0,
+      "f1": 0.018632309217046582,
+      "precision": 0.009403761504601841,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 14,
+      "first_test_line": 1353932,
+      "blocks": 5000,
+      "anomalous": 47,
+      "fpr": 0.9997981021603068,
+      "recall": 1.0,
+      "f1": 0.0186286167261197,
+      "precision": 0.009401880376075216,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 15,
+      "first_test_line": 1418913,
+      "blocks": 5000,
+      "anomalous": 78,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.030720756203229616,
+      "precision": 0.0156,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 16,
+      "first_test_line": 1491843,
+      "blocks": 5000,
+      "anomalous": 61,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.02410590792333531,
+      "precision": 0.0122,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 17,
+      "first_test_line": 1556642,
+      "blocks": 5000,
+      "anomalous": 75,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.02955665024630542,
+      "precision": 0.015,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 18,
+      "first_test_line": 1621225,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03381832481321274,
+      "precision": 0.0172,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 19,
+      "first_test_line": 1686012,
+      "blocks": 5000,
+      "anomalous": 100,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.0392156862745098,
+      "precision": 0.02,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 20,
+      "first_test_line": 1750600,
+      "blocks": 5000,
+      "anomalous": 86,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03381832481321274,
+      "precision": 0.0172,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 21,
+      "first_test_line": 1815093,
+      "blocks": 5000,
+      "anomalous": 89,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.03497740224012576,
+      "precision": 0.0178,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 22,
+      "first_test_line": 1879854,
+      "blocks": 5000,
+      "anomalous": 73,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.028779814705302584,
+      "precision": 0.0146,
+      "normal_blocks_with_unknown": 0
+    },
+    {
+      "window": 23,
+      "first_test_line": 1948467,
+      "blocks": 13,
+      "anomalous": 1,
+      "fpr": 1.0,
+      "recall": 1.0,
+      "f1": 0.14285714285714288,
+      "precision": 0.07692307692307693,
+      "normal_blocks_with_unknown": 0
+    }
+  ]
+}

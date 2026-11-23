@@ -42,6 +42,7 @@ Outputs (results/drift/):
   summary.csv                   one row per scenario (rewritten after every scenario)
 """
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -193,6 +194,7 @@ def run_scenario(sc, a, st_bytes, st, test_index, col_of, n_feat, base_ids):
              "reworded_lines_absorbed": 0, "reworded_lines_new_template": 0,
              "test_block_lines_not_counted": 0}
     new_templates, generalised = {}, {}
+    sha = hashlib.sha1()                            # fingerprint of which lines were reworded (shared with group B)
 
     pos = 0
     t0 = time.time()
@@ -214,6 +216,7 @@ def run_scenario(sc, a, st_bytes, st, test_index, col_of, n_feat, base_ids):
                     if sc["type"] == "sudden" or rng.random() < min((pos - onset) / ramp, 1.0):
                         content = s[sc["level"]].format(**params)
                         reworded = True
+                        sha.update(f"{pos}:{s['id']};".encode())
             r = miner.add_log_message(content)
             cid = r["cluster_id"]
             if reworded:
@@ -241,6 +244,7 @@ def run_scenario(sc, a, st_bytes, st, test_index, col_of, n_feat, base_ids):
                 break
     stats["lines_parsed"] = pos
     stats["parse_seconds"] = round(time.time() - t0, 1)
+    stats["reworded_lines_sha1"] = sha.hexdigest()
     text = {c.cluster_id: c.get_template() for c in miner.drain.clusters}
     stats["new_templates"] = [{"template_id": int(c), "first_seen_at_test_line": int(p), "template": text[c]}
                               for c, p in sorted(new_templates.items())]

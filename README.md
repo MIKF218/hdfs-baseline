@@ -1,14 +1,46 @@
-# Group A: Template-Based Fixed Detector (HDFS Baseline)
+# Streaming Log Anomaly Detection under Format Drift (HDFS)
 
-Part of the master's thesis **Streaming Log Anomaly Detection under Format Drift**
+Code and results for the master's thesis **Streaming Log Anomaly Detection under Format Drift**
 (M.Sc. Big Data Analytics and Management, Bahçeşehir University).
 
-This project implements **method group A**: a template-based pipeline with a fixed (non-updating)
-anomaly detector. Raw logs are parsed into event templates with Drain3, each HDFS block becomes an
-event-count vector, and PCA flags blocks that deviate from normal behaviour.
+The thesis compares how anomaly detectors react when normal log messages are reworded (format drift)
+while the events they describe stay the same. Three method groups are compared under identical
+conditions: the same data split, drift scenarios, detector and metrics.
 
-**Current stage:** no-drift baseline on HDFS, completed and reproduced (November 2026).
-Format-drift experiments come next and must reuse the settings below unchanged.
+| Group | Representation | Detector | Where | Status |
+|---|---|---|---|---|
+| A | Drain3 template counts | PCA + Q-statistic, fixed | this folder (`src/`, `results/`) | done |
+| B | Sentence-BERT message embeddings | PCA + Q-statistic, fixed | [`group_b/`](group_b/README.md) | done |
+| C | Sentence-BERT message embeddings | online, updated without labels | to follow | planned |
+
+Groups B and C import group A's code for the split, drift injection and evaluation, so all groups are
+tested on exactly the same reworded log lines (checked by a fingerprint of the reworded lines).
+
+**Current stage (November 2026):** groups A and B are complete on HDFS, including no-drift baselines,
+sudden and gradual drift at three magnitudes, prevalence runs and robustness checks.
+
+---
+
+## Main results so far
+
+| Scenario | F1, group A | F1, group B |
+|---|---|---|
+| No drift | 0.979 | 0.851 |
+| Low or medium rewording (sudden or gradual) | 0.034–0.039 | 0.857–0.860 |
+| High rewording (sudden or gradual) | 0.034–0.036 | 0.034–0.039 |
+
+Group A flags every normal block once any common message is reworded in a way the parser does not absorb.
+Group B tolerates low and medium rewording but collapses at high magnitude, when reworded messages become
+closer in meaning to a different event. Neither fixed group recovers. Details: group A below,
+group B in [`group_b/README.md`](group_b/README.md).
+
+---
+
+# Group A: Template-Based Fixed Detector
+
+Group A is a template-based pipeline with a fixed (non-updating) anomaly detector. Raw logs are parsed
+into event templates with Drain3, each HDFS block becomes an event-count vector, and PCA flags blocks
+that deviate from normal behaviour.
 
 ---
 
@@ -44,11 +76,20 @@ hdfs-baseline/
 ├── .gitignore                        ignores data/ and Python cache only
 ├── Dockerfile                        Python 3.12 image; default command runs the primary pipeline
 ├── README.md
-├── requirements.txt                  drain3, scikit-learn, pandas, numpy (pinned)
+├── requirements.txt                  drain3, scikit-learn, pandas, numpy, sentence-transformers (pinned)
+├── group_b/                          group B: semantic representation
+│   ├── README.md                     group B design, results and commands
+│   ├── src/run_drift_b.py            group B drift scenarios (imports group A's code)
+│   └── results/
+│       ├── drift/                    main design: summary.csv + one JSON per scenario
+│       ├── drift_maxweight/          robustness check (unseen messages at maximum weight)
+│       ├── figures/                  fig3_group_a_vs_b_fpr_over_time.png
+│       └── v1_invalid/               first run, failed the baseline check; kept for the record
 ├── data/                             HDFS dataset (ignored by git, download from LogHub)
 │   ├── .gitkeep
 │   ├── HDFS.log
-│   └── anomaly_label.csv
+│   ├── anomaly_label.csv
+│   └── .hf_cache/                    downloaded Sentence-BERT model (group B), created on first run
 ├── results/                          all outputs (tracked in git)
 │   ├── counts.csv                    block x template count matrix, 575,061 rows (~71 MB)
 │   ├── results_pca_q.json            PRIMARY result: PCA + Q-statistic
@@ -57,7 +98,12 @@ hdfs-baseline/
 │   ├── results.json                  first run: Isolation Forest, 80/20 split
 │   ├── templates.csv                 the 46 Drain3 templates and their counts
 │   ├── test_scores.csv               first run: anomaly score per test block
-│   └── v2_run.log                    run log of hdfs_baseline_v2.py
+│   ├── v2_run.log                    run log of hdfs_baseline_v2.py
+│   ├── drift/                        format-drift runs, main design (summary.csv + one JSON per scenario)
+│   ├── drift_drop/                   format-drift runs, robustness check (unseen templates dropped)
+│   └── figures/
+│       ├── fig1_group_a_fpr_over_time.png   false-positive rate over time, no drift vs sudden vs gradual
+│       └── fig2_unknown_vs_drop.png         unknown feature vs dropping unseen templates (gradual, medium)
 └── src/
     ├── export_counts.py              step 1: HDFS.log -> results/counts.csv
     ├── hdfs_baseline_pca_q.py        step 2: PRIMARY detector, PCA + Q-statistic
@@ -66,7 +112,7 @@ hdfs-baseline/
     ├── check_parser_leakage.py       leakage check across the train/test split
     ├── paraphrases.py                format-drift paraphrases of the 13 normal-event statements
     ├── check_paraphrases.py          magnitude, Drain3 reaction and coverage of the paraphrases
-    └── run_drift.py                  sudden / gradual / prevalence drift scenarios
+    └── run_drift.py                  group A: sudden / gradual / prevalence drift scenarios
 ```
 
 ---
@@ -213,7 +259,43 @@ Phases: `before_onset` = blocks whose lines all precede the drift; `spanning_ons
 before and continue after it; `after_onset` (sudden) or `during_ramp` / `after_ramp` (gradual) = blocks
 that start after it. Exposure: blocks with and without at least one reworded line.
 
-Groups B (semantic, fixed) and C (semantic, online and unsupervised) will be separate projects.
+### Group A drift results
+
+| Scenario | F1 | False-positive rate after drift | PR-AUC |
+|---|---|---|---|
+| No drift | 0.979 | 0.00004 | 0.957 |
+| Sudden, low / medium / high | 0.034 | 1.000 | 0.061–0.068 |
+| Gradual, low / medium / high | 0.036–0.039 | 1.000 | 0.057–0.060 |
+
+Magnitude makes no difference: one reworded line that Drain3 does not absorb pushes a block past the
+threshold, and every normal block contains such lines. Drain3 absorbs part of the low-magnitude drift
+(64% of reworded lines) and in one case merges two different events. Prevalence measured as a share of
+statements is unreliable: the same 25% gives F1 0.87 or 0.03 depending on whether a frequent message
+(allocateBlock) is included. The robustness check (`--unseen drop`) also ends with every normal block
+flagged, but degrades more slowly and keeps a usable ranking (PR-AUC 0.58–0.78). Figures:
+`results/figures/fig1_group_a_fpr_over_time.png`, `results/figures/fig2_unknown_vs_drop.png`.
+
+---
+
+## Group B: semantic representation, fixed detector
+
+Group B lives in [`group_b/`](group_b/README.md) with its own code, results and README. It shares this
+project's dataset, Docker image and group A's code, so the split, drift scenarios and metrics are identical.
+Run it from this folder (the project root):
+
+```bash
+python group_b/src/run_drift_b.py --log data/HDFS.log --counts results/counts.csv
+```
+
+With plain Docker (PowerShell, one line), also mount group B's results folder:
+
+```bash
+docker run --rm -v "${PWD}/data:/workspace/data" -v "${PWD}/results:/workspace/results" -v "${PWD}/group_b/results:/workspace/group_b/results" hdfs-baseline python group_b/src/run_drift_b.py --log data/HDFS.log --counts results/counts.csv
+```
+
+## Group C
+
+Semantic representation with an online detector updated without labels; to follow, in its own folder.
 
 ---
 
@@ -222,5 +304,6 @@ Groups B (semantic, fixed) and C (semantic, online and unsupervised) will be sep
 - He, P., Zhu, J., Zheng, Z., & Lyu, M. R. (2017). Drain: An online log parsing approach with fixed depth tree. *IEEE ICWS 2017*. https://doi.org/10.1109/ICWS.2017.13
 - Jackson, J. E., & Mudholkar, G. S. (1979). Control procedures for residuals associated with principal component analysis. *Technometrics*, 21(3), 341–349.
 - Liu, F. T., Ting, K. M., & Zhou, Z.-H. (2008). Isolation forest. *IEEE ICDM 2008*.
+- Reimers, N., & Gurevych, I. (2019). Sentence-BERT: Sentence embeddings using Siamese BERT-networks. *EMNLP-IJCNLP 2019*. https://doi.org/10.18653/v1/D19-1410
 - Xu, W., Huang, L., Fox, A., Patterson, D., & Jordan, M. I. (2009). Detecting large-scale system problems by mining console logs. *ACM SOSP 2009*.
 - Zhu, J., He, S., He, P., Liu, J., & Lyu, M. R. (2023). Loghub: A large collection of system log datasets for AI-driven log analytics. *IEEE ISSRE 2023*. https://arxiv.org/abs/2008.06448
